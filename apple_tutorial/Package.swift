@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Hello",
+    name: "apple_tutorial",
     platforms: [
         .iOS(.v17),
         .macOS(.v14),
@@ -12,13 +12,14 @@ let package = Package(
         // An xtool project should contain exactly one library product,
         // representing the main app.
         .library(
-            name: "Hello",
-            targets: ["Hello"]
-        ),
+            name: "apple_tutorial",
+            targets: ["apple_tutorial"]
+        )
     ],
     targets: [
         .target(
-            name: "Hello"
-        ),
+            name: "apple_tutorial",
+            resources: [.process("Assets.xcassets")]
+        )
     ]
 )
