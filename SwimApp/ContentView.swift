@@ -8,14 +8,42 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var store: WorkoutStore
+    @State private var selectedWorkout: SwimWorkout?
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List {
+                ForEach($store.workouts) { $workout in
+                    NavigationLink(workout.title) {
+                        WorkoutEditorView(workout: $workout)
+                    }
+                }
+                .onDelete { indexSet in
+                    store.workouts.remove(atOffsets: indexSet)
+                }
+            }
+            .navigationTitle("Swim Workouts")
+            .toolbar {
+                Button {
+                    addWorkout()
+                } label: {
+                    Label("Add Workout", systemImage: "plus")
+                }
+            }
         }
-        .padding()
+    }
+
+    func addWorkout() {
+        let newWorkout = SwimWorkout(title: "New Workout", date: Date(), sets: [])
+        store.workouts.append(newWorkout)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(WorkoutStore())
     }
 }
 
