@@ -14,8 +14,8 @@ struct WorkoutEditorView: View {
     var body: some View {
         NavigationStack {
             Form {
-                // workoutInfoSection
-                // setsSection
+                workoutInfoSection
+                setsSection
             }
             .navigationTitle("Edit Workout")
             .toolbar {

@@ -16,17 +16,9 @@ struct SwimSetEditorView: View {
             
             // Instructions
             ForEach($set.instructions) { $instruction in
-                // SwimInstructionEditorView(instruction: $instruction)
+                SwimInstructionEditorView(instruction: $instruction)
             }
             .onDelete(perform: deleteInstruction)
-
-            HStack {
-                Text("Rounds")
-                Spacer()
-                TextField("1", value: $set.rounds, format: .number)
-                    .keyboardType(.numberPad)
-                    .multilineTextAlignment(.trailing)
-            }
             
             Button {
                 addInstruction()
